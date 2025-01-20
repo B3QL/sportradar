@@ -12,3 +12,12 @@ def test_add_new_match_to_scoreboard():
     board.add("Mexico", "Brazil")
 
     assert len(board.summary) == 1
+
+def test_score_is_zero_zero_for_new_matches():
+    """Test if the match initial score is 0-0"""
+    board = ScoreBoard()
+
+    board.add("Mexico", "Brazil")
+
+    first_match, = board.summary
+    assert first_match.score == (0, 0)
