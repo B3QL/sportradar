@@ -31,3 +31,14 @@ def test_update_score():
 
     first_match, = board.summary
     assert first_match.score == (1, 0)
+
+def test_remove_match():
+    """Test if removed match is not in summary"""
+    board = ScoreBoard()
+    match_id =  board.add("Mexico", "Brazil")
+
+    board.remove(match_id)
+
+    assert board.summary == []
+
+

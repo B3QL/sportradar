@@ -27,3 +27,7 @@ class ScoreBoard:
     def update_score(self, match_id: UUID, home_score: int, away_score: int):
         """Update score of specific match"""
         self._matches[match_id].score = (home_score, away_score)
+
+    def remove(self, match_id: UUID):
+        """Remove match from scoreboard"""
+        del self._matches[match_id]
