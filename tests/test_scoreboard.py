@@ -21,3 +21,13 @@ def test_score_is_zero_zero_for_new_matches():
 
     first_match, = board.summary
     assert first_match.score == (0, 0)
+
+def test_update_score():
+    """Test if score of the match is updated"""
+    board = ScoreBoard()
+
+    match_id = board.add("Mexico", "Brazil")
+    board.update_score(match_id, 1, 0)
+
+    first_match, = board.summary
+    assert first_match.score == (1, 0)
