@@ -1,5 +1,6 @@
 from uuid import uuid4, UUID
 from dataclasses import dataclass, field
+from copy import deepcopy
 
 @dataclass
 class Match:
@@ -31,7 +32,7 @@ class ScoreBoard:
                 and sorted is guaranteed to be stable as well.
         """
         most_recent = reversed(self._matches.values())
-        return sorted(most_recent, reverse=True)
+        return deepcopy(sorted(most_recent, reverse=True))
 
     def add(self, home_team: str, away_team: str) -> UUID:
         """Add new match to score board"""

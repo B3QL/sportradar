@@ -32,6 +32,18 @@ def test_update_score():
     first_match, = board.summary
     assert first_match.score == (1, 0)
 
+def test_update_score_via_match():
+    """Test if score update cannot be persisted via match object"""
+    board = ScoreBoard()
+    board.add("Mexico", "Brazil")
+    match, = board.summary
+
+    match.score = (13, 37)
+
+    original_match, = board.summary
+    assert original_match.score == (0, 0)
+
+
 def test_remove_match():
     """Test if removed match is not in summary"""
     board = ScoreBoard()
