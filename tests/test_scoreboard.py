@@ -102,3 +102,8 @@ def test_match_representation_with_different_scores():
 
     assert str(poleng_match) == "Poland 21 - England 37"
 
+def test_empty_score_board_representation():
+    """Test if emtpy score is pretty-printable"""
+    board = ScoreBoard()
+
+    assert str(board) == ''
