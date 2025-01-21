@@ -107,3 +107,24 @@ def test_empty_score_board_representation():
     board = ScoreBoard()
 
     assert str(board) == ''
+
+def test_full_score_board_representation():
+    """Test if full scoreboard is pretty-printable"""
+    board = ScoreBoard()
+    matches = [
+        ("Mexico", 0, "Canada", 5),
+        ("Spain", 10, "Brazil", 2),
+        ("Germany", 2, "France", 2),
+        ("Uruguay", 6, "Italy",  6),
+        ("Argentina", 3, "Australia", 1)
+    ]
+    for (home_team, home_score, away_team, away_score) in matches:
+        mid = board.add(home_team, away_team)
+        board.update_score(mid, home_score, away_score)
+
+    assert str(board) == (
+    "1. Uruguay 6 - Italy 6\n"
+    "2. Spain 10 - Brazil 2\n"
+    "3. Mexico 0 - Canada 5\n"
+    "4. Argentina 3 - Australia 1\n"
+    "5. Germany 2 - France 2")

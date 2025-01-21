@@ -49,4 +49,5 @@ class ScoreBoard:
 
     def __str__(self) -> str:
         """Return string representation"""
-        return ""
+        matches = [f"{pos}. {match}" for pos, match in enumerate(self.summary, start=1)]
+        return "\n".join(matches)
