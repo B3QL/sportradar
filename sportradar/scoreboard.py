@@ -9,7 +9,7 @@ class Match:
 
     def __lt__(self, other: 'Match') -> bool:
         """Compare matches"""
-        return other
+        return sum(self.score)
 
 class ScoreBoard:
     def __init__(self):
