@@ -1,3 +1,4 @@
+import pytest
 from sportradar.scoreboard import ScoreBoard
 
 def test_create_empty_scoreboard():
@@ -25,12 +26,28 @@ def test_score_is_zero_zero_for_new_matches():
 def test_update_score():
     """Test if score of the match is updated"""
     board = ScoreBoard()
-
     match_id = board.add("Mexico", "Brazil")
+
     board.update_score(match_id, 1, 0)
 
     first_match, = board.summary
     assert first_match.score == (1, 0)
+
+@pytest.mark.parametrize('home, away', [
+    (0, -1),
+    (0, -1),
+    (-1, -1)
+])
+def test_update_negative_score(home, away):
+    """Test if updating negative score is forbidden"""
+    board = ScoreBoard()
+    match_id = board.add("Mexico", "Brazil")
+
+    with pytest.raises(ValueError):
+        board.update_score(match_id, home, away)
+
+    first_match, = board.summary
+    assert first_match.score == (0, 0)
 
 def test_update_score_via_match():
     """Test if score update cannot be persisted via match object"""

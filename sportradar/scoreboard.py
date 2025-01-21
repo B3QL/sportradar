@@ -42,6 +42,9 @@ class ScoreBoard:
 
     def update_score(self, match_id: UUID, home_score: int, away_score: int):
         """Update score of specific match"""
+        if home_score < 0 or away_score < 0:
+            raise ValueError("score must not be negative")
+
         self._matches[match_id].score = (home_score, away_score)
 
     def remove(self, match_id: UUID):
