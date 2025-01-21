@@ -49,7 +49,10 @@ class ScoreBoard:
 
     def remove(self, match_id: UUID):
         """Remove match from scoreboard"""
-        del self._matches[match_id]
+        try:
+            del self._matches[match_id]
+        except KeyError:
+            raise RuntimeError("match does not exist")
 
     def __str__(self) -> str:
         """Return string representation"""

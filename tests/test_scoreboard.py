@@ -70,6 +70,16 @@ def test_remove_match():
 
     assert board.summary == []
 
+def test_remove_not_existing_match():
+    """Test if removing not existing match raises an error"""
+    board = ScoreBoard()
+    match_id = board.add("Mexico", "Brazil")
+    board.remove(match_id)
+
+    with pytest.raises(RuntimeError):
+        board.remove(match_id)
+
+
 def test_summary_order_by_total_score():
     """Test if summary return matches with total score descending order"""
     board = ScoreBoard()
