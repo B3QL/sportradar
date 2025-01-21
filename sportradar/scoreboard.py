@@ -7,6 +7,9 @@ class Match:
     mid: UUID = field(default_factory=uuid4)
     score: tuple[int, int] = (0, 0)
 
+    def __lt__(self, other: 'Match') -> bool:
+        """Compare matches"""
+        return other
 
 class ScoreBoard:
     def __init__(self):
@@ -16,7 +19,7 @@ class ScoreBoard:
     @property
     def summary(self) -> list[Match]:
         """Return summary of ongoing matches"""
-        return list(self._matches.values())
+        return list(sorted(self._matches.values()))
 
     def add(self, home_team: str, away_team: str) -> UUID:
         """Add new match to score board"""

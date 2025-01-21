@@ -41,4 +41,15 @@ def test_remove_match():
 
     assert board.summary == []
 
+def test_summary_order_by_total_score():
+    """Test if summary return matches with total score descending order"""
+    board = ScoreBoard()
+    mexcan_match = board.add("Mexico", "Canada")
+    board.update_score(mexcan_match, 0, 5)
+    spabra_match = board.add("Spain", "Brazil")
+    board.update_score(spabra_match, 10, 2)
 
+    first_match, second_match = board.summary
+
+    assert first_match.mid == spabra_match
+    assert second_match.mid == mexcan_match
