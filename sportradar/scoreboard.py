@@ -9,7 +9,7 @@ class Match:
 
     def __lt__(self, other: 'Match') -> bool:
         """Compare matches"""
-        return sum(self.score)
+        return sum(self.score) < sum(other.score)
 
 class ScoreBoard:
     def __init__(self):
@@ -18,8 +18,14 @@ class ScoreBoard:
 
     @property
     def summary(self) -> list[Match]:
-        """Return summary of ongoing matches"""
-        return list(sorted(self._matches.values()))
+        """
+        Return summary of ongoing matches
+
+        ..note: The insertion order of dictionary values is guaranteed from Python 3.7
+                and sorted is guaranteed to be stable as well.
+        """
+        most_recent = reversed(self._matches.values())
+        return sorted(most_recent, reverse=True)
 
     def add(self, home_team: str, away_team: str) -> UUID:
         """Add new match to score board"""

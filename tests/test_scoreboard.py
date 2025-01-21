@@ -70,3 +70,15 @@ def test_summary_order_by_total_score_more_matches():
     assert second_match.mid == mexcan_match
     assert third_match.mid == poleng_match
 
+def test_summary_order_with_same_score():
+    """Test if matches with the same score are ordered by the start time"""
+    board = ScoreBoard()
+    poleng_match = board.add("Poland", "England")
+    mexcan_match = board.add("Mexico", "Canada")
+    spabra_match = board.add("Spain", "Brazil")
+
+    first_match, second_match, third_match = board.summary
+
+    assert first_match.mid == spabra_match
+    assert second_match.mid == mexcan_match
+    assert third_match.mid == poleng_match
