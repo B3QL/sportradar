@@ -4,12 +4,18 @@ from dataclasses import dataclass, field
 @dataclass
 class Match:
     """Data related to single match"""
+    home_team: str
+    away_team: str
     mid: UUID = field(default_factory=uuid4)
     score: tuple[int, int] = (0, 0)
 
     def __lt__(self, other: 'Match') -> bool:
         """Compare matches"""
         return sum(self.score) < sum(other.score)
+
+    def __str__(self) -> str:
+        """Return string representation"""
+        return f'{self.home_team} {self.score[0]} - {self.away_team} {self.score[0]}'
 
 class ScoreBoard:
     def __init__(self):
@@ -29,7 +35,7 @@ class ScoreBoard:
 
     def add(self, home_team: str, away_team: str) -> UUID:
         """Add new match to score board"""
-        new_match = Match()
+        new_match = Match(home_team, away_team)
         self._matches[new_match.mid] = new_match
         return new_match.mid
 

@@ -82,3 +82,12 @@ def test_summary_order_with_same_score():
     assert first_match.mid == spabra_match
     assert second_match.mid == mexcan_match
     assert third_match.mid == poleng_match
+
+
+def test_match_representation():
+    """Test if matches are pretty-printable"""
+    board = ScoreBoard()
+    board.add("Poland", "England")
+    poleng_match, = board.summary
+
+    assert str(poleng_match) == "Poland 0 - England 0"
