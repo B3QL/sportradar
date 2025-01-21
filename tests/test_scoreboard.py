@@ -91,3 +91,14 @@ def test_match_representation():
     poleng_match, = board.summary
 
     assert str(poleng_match) == "Poland 0 - England 0"
+
+def test_match_representation_with_different_scores():
+    """Test if match representation contains a valid score"""
+    board = ScoreBoard()
+    poleng_match = board.add("Poland", "England")
+    board.update_score(poleng_match, 21, 37)
+
+    poleng_match, = board.summary
+
+    assert str(poleng_match) == "Poland 21 - England 37"
+

@@ -15,7 +15,7 @@ class Match:
 
     def __str__(self) -> str:
         """Return string representation"""
-        return f'{self.home_team} {self.score[0]} - {self.away_team} {self.score[0]}'
+        return f'{self.home_team} {self.score[0]} - {self.away_team} {self.score[1]}'
 
 class ScoreBoard:
     def __init__(self):
