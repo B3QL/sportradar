@@ -54,6 +54,27 @@ class ScoreBoard:
         except KeyError:
             raise RuntimeError("match does not exist")
 
+    def team_score(self, name: str) -> int:
+        """Fetch score for single team"""
+        scores = [
+            (m.home_team, m.away_team, m.score)
+            for m in self._matches.values() if m.home_team == name or m.away_team == name
+        ]
+
+        if not scores:
+            raise ValueError('match does not exit')
+
+        (home_team, away_team, score), = scores
+
+        if home_team == name:
+            return score[0]
+
+        if away_team == name:
+            return score[1]
+
+
+
+
     def __str__(self) -> str:
         """Return string representation"""
         matches = [f"{pos}. {match}" for pos, match in enumerate(self.summary, start=1)]

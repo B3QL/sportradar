@@ -167,3 +167,28 @@ def test_full_score_board_representation():
     "3. Mexico 0 - Canada 5\n"
     "4. Argentina 3 - Australia 1\n"
     "5. Germany 2 - France 2")
+
+def test_score_board_single_score():
+    """Check if feaching single score return correct result"""
+    board = ScoreBoard()
+    matches = [
+        ("Mexico", 0, "Canada", 5),
+        ("Spain", 10, "Brazil", 2),
+        ("Germany", 2, "France", 2),
+        ("Uruguay", 6, "Italy", 6),
+        ("Argentina", 3, "Australia", 1)
+    ]
+
+    for (home_team, home_score, away_team, away_score) in matches:
+        mid = board.add(home_team, away_team)
+        board.update_score(mid, home_score, away_score)
+
+    assert board.team_score('Uruguay') == 6
+    assert board.team_score('Canada') == 5
+
+def test_score_board_missing_team():
+    """Check if error is raised when fetching not existing score"""
+    board = ScoreBoard()
+
+    with pytest.raises(ValueError):
+        board.team_score('Not Existing')
